@@ -23,6 +23,7 @@ public class JobController {
   private final JobLauncher jobLauncher;
   private final Job simpleJob;
 
+
   @RequestMapping("/example")
   public void simpleJob(@RequestParam(value = "label") final String label) {
     runJobB(this.simpleJob, label);
