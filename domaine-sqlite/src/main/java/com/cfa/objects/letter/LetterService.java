@@ -18,4 +18,16 @@ public class LetterService {
     public List<Letter> getAllLetters(final String message, final Date creationDate, final Date treatmentDate){
         return letterRepository.findAll();
     }
+
+    public Letter getLetterById(final long id){
+        return letterRepository.findById(id).orElse(null);
+    }
+
+    public long saveLetter(Letter letter){
+        return letterRepository.save(letter).getId();
+    }
+
+    public List<Letter> saveLetters(List<Letter> letters){
+        return letterRepository.saveAll(letters);
+    }
 }

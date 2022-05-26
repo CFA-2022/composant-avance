@@ -20,27 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class JobController {
 
-  private final JobLauncher jobLauncher;
-  private final Job simpleJob;
+    private final JobLauncher jobLauncher;
+    private final Job remoteChunkingJob;
 
 
-  @RequestMapping("/example")
-  public void simpleJob(@RequestParam(value = "label") final String label) {
-    runJobB(this.simpleJob, label);
-  }
-
-  private void runJobB(final Job parJob, final String label) {
-    final JobParameters locParamJobParameters = new JobParametersBuilder()
-      .addParameter("value", new JobParameter(label))
-      .addParameter("time", new JobParameter(System.currentTimeMillis()))
-      .toJobParameters();
-
-    try {
-      log.info("[Job] running . . .");
-      jobLauncher.run(parJob, locParamJobParameters);
-    } catch (Exception ex) {
-      log.error("[RUN JOB ERROR] : " + ex.getMessage());
+    @RequestMapping("/example")
+    public void simpleJob(@RequestParam(value = "label") final String label) {
+        runJobB(this.remoteChunkingJob, label);
     }
-  }
+
+    private void runJobB(final Job parJob, final String label) {
+        final JobParameters locParamJobParameters = new JobParametersBuilder()
+                .addParameter("value", new JobParameter(label))
+                .addParameter("time", new JobParameter(System.currentTimeMillis()))
+                .toJobParameters();
+
+        try {
+            log.info("[Job] running . . .");
+            jobLauncher.run(parJob, locParamJobParameters);
+        } catch (Exception ex) {
+            log.error("[RUN JOB ERROR] : " + ex.getMessage());
+        }
+    }
 
 }

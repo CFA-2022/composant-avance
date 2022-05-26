@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableBatchIntegration
@@ -69,7 +70,7 @@ public class LetterJob {
     public Step letterStep() {
         return this.stepBuilderFactory
                 .get("letterStep")
-                .<Letter, Letter>chunk(1)
+                .<Letter, Letter>chunk(5)
                 .reader(reader())
                 .writer(letterWriter)
                 .build();
