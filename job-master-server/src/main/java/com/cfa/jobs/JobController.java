@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobController {
 
     private final JobLauncher jobLauncher;
+    //private final Job remoteChunkingJob;
     private final Job remoteChunkingJob;
-
 
     @RequestMapping("/example")
     public void simpleJob(@RequestParam(value = "label") final String label) {
