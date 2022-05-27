@@ -21,6 +21,7 @@ public class LetterController {
     public ResponseEntity<List<Letter>> getAll(@RequestParam(required = false) String message,
                                                @RequestParam(required = false) Date creationDate,
                                                @RequestParam(required = false) Date treatmentDate) {
+        // TODO: Get all my multiple criteria
         if (message != null) {
             return ResponseEntity.status(HttpStatus.OK).body(letterService.findAllByMessage(message));
         }
