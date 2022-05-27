@@ -17,16 +17,25 @@ public class LetterController {
 
     private final LetterService letterService;
 
-    @GetMapping("/")
-    public List<Letter> getAll(@RequestParam(required = false) String message,
-                               @RequestParam(required = false) Date creationDate,
-                               @RequestParam(required = false) Date treatmentDate) {
-        return letterService.getAllLetters(message, creationDate, treatmentDate);
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<List<Letter>> getAll(@RequestParam(required = false) String message,
+                                               @RequestParam(required = false) Date creationDate,
+                                               @RequestParam(required = false) Date treatmentDate) {
+        if (message != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(letterService.findAllByMessage(message));
+        }
+        if (creationDate != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(letterService.getAllLettersByCreationDate(creationDate));
+        }
+        if (treatmentDate != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(letterService.getAllLettersByTreatmentDate(treatmentDate));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(letterService.getAllLetters(message, creationDate, treatmentDate));
     }
 
     @GetMapping("/{id}")
-    public Letter getById(@PathVariable("id") long id) {
-        return letterService.getLetterById(id);
+    public ResponseEntity<Letter> getById(@PathVariable("id") long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(letterService.getLetterById(id));
     }
 
     @PostMapping("")

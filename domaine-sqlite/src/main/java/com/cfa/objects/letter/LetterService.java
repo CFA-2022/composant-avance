@@ -19,6 +19,17 @@ public class LetterService {
         return letterRepository.findAll();
     }
 
+    public List<Letter> getAllLettersByCreationDate(final Date creationDate){
+        return letterRepository.findAllByCreationDate(creationDate);
+    }
+
+    public List<Letter> getAllLettersByTreatmentDate(final Date treatmentDate){
+        return letterRepository.findAllByTreatmentDate(treatmentDate);
+    }
+
+    public List<Letter> findAllByMessage(final String message){
+        return letterRepository.findAllByMessage(message);
+    }
     public Letter getLetterById(final long id){
         return letterRepository.findById(id).orElse(null);
     }
